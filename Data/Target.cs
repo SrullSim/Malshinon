@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Malshinon.Data
 {
-    internal class Targets: Person
+    internal class Target: Person
     {
 
         protected string CodeName {  get; set; }
 
 
-
+        public Target
 
     }
 }
