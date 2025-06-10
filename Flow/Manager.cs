@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Malshinon.Data
+namespace Malshinon.Flow
 {
-    internal class PotentialRecruits
+    internal class Manager
     {
+
+
     }
 }

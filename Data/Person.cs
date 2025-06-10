@@ -8,7 +8,7 @@ namespace Malshinon.Data
 {
     abstract class Person
     {
-        protected string Name { get; set; }
+        public string Name { get; set; }
         protected int Id { get; set; }
 
         

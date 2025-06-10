@@ -9,10 +9,26 @@ namespace Malshinon.Data
     internal class Target: Person
     {
 
-        protected string CodeName {  get; set; }
+        public string CodeName {  get; set; }
+        protected int DangerLevel { get; set; } = 0;
 
 
-        public Target
+        public Target(string name, int id, int dangerLevel): base(name, id)
+        {
+            this.CodeName = setCodeName();
+            this.DangerLevel = dangerLevel;
+        }
+
+
+
+        // set code name to every new target
+        public string setCodeName()
+        {
+            return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+        }
+
+
+
 
     }
 }
