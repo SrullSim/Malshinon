@@ -19,9 +19,9 @@ namespace Malshinon.Data
             this.Id = id;
             this.CodeName = setCodeName(id);
             this.DangerLevel = dangerLevel;
-
         }
 
+        public Target() { }
 
 
         // set code name to every new target

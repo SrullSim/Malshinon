@@ -9,40 +9,59 @@ namespace Malshinon.Flow
     internal class Manager
     {
 
-        Dal dal = new Dal();
+        
         public static void start()
         {
+            Dal dal = new Dal();
             int chois = Print.entryPrint();
 
-            switch(chois)
-            { 
-                case 1 :
-                    Report report = new Report();
-                    
-                    // get reporter id
-                    report.reporter.Id = Print.Report_getReporterId();
-                    // gef reporter name
-                    report.reporter.Name = Print.Report_getReporterName();
+            switch (chois)
+            {
+                case 1:
+                    executeReport();
 
-                    // get target  id
-                    report.target.Id = Print.ReportPrint_GetTargetId();
-                    // get target name
-                    report.target.Name = Print.Report_getTargetName();
+                    break;
 
-                    //get report text 
-                    report.text = Print.ReportPrint_GetText();
-
-                    Dal.AddReport(report);
-
+                case 2:
 
 
 
                     break;
-                    
+
+
+
+            }
+
 
 
         }
-        
+
+
+
+
+
+        public static void executeReport()
+        {
+            Dal dal = new Dal();
+            Report report = new Report();
+
+            // get reporter id
+            report.reporter.Id = Print.Report_getReporterId();
+            // gef reporter name
+            report.reporter.Name = Print.Report_getReporterName();
+
+            // get target  id
+            report.target.Id = Print.ReportPrint_GetTargetId();
+            // get target name
+            report.target.Name = Print.Report_getTargetName();
+
+            //get report text 
+            report.text = Print.ReportPrint_GetText();
+
+            dal.AddReport(report);
+        }
+
+
 
 
     }

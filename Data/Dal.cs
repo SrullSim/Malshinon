@@ -96,12 +96,13 @@ namespace Malshinon.Data
                     command.Parameters.AddWithValue("@name", reporter.Name);
                     command.Parameters.AddWithValue("@codeName", reporter.codeName);
                     command.Parameters.AddWithValue("@rating", reporter.rating);
-                    Console.WriteLine("the reporter update successfully");
 
 
                     // execute the commad
                     command.ExecuteNonQuery();
                     return " reporter add successfully to reporters";
+                    Console.WriteLine("the reporter update successfully");
+
                 }
                 catch (Exception ex)
                 {

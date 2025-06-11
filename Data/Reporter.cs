@@ -22,6 +22,8 @@ namespace Malshinon.Data
 
         }
 
+        public Reporter() { }
+
 
         // set new assigned to reporter
         public bool setIsRecruise()

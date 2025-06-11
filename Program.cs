@@ -12,15 +12,7 @@ namespace Malshinon
         {
             Dal managereports = new Dal();
 
-            Reporter reporter =new Reporter(58,"rerrr");
-            Target target = new Target(96,"ali", 8);
-            Report report = new Report();
-            
-            report.reporter = reporter;
-            report.target = target;
-            report.text = "תמיד שמח";
-            
-            managereports.AddReport(report);
+            Manager.start();
 
         }
     }

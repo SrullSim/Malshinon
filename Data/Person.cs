@@ -18,6 +18,8 @@ namespace Malshinon.Data
             this.Id = id;
         }
 
+        public Person() { }
+
 
 
 
