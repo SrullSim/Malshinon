@@ -38,7 +38,7 @@ namespace Malshinon.Data
 
 
         // querrys from table targets
-        public static string insertTarget = @"INSERT INTO targets(name, codeName, dangerous) VALUE(@name, @codeName, @dangerous)";
+        public static string insertTarget = @"INSERT INTO targets(id, name, codeName, dangerous) VALUE(@id, @name, @codeName, @dangerous)";
 
         public static string getTarget = @"SELECT * FROM targets WHERE id=@id";
 

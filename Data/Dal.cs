@@ -43,6 +43,7 @@ namespace Malshinon.Data
                 command.Parameters.AddWithValue("@target", report.target.Name);
                 command.Parameters.AddWithValue("@text", report.text);
                 command.Parameters.AddWithValue("@timeOfReport", report.timeOfReport);
+                
 
                 int result = command.ExecuteNonQuery();
                 Console.WriteLine("succcessfully" );
@@ -126,6 +127,7 @@ namespace Malshinon.Data
 
             if (!IsIdExists("targets", target.Id))
             {
+                Console.WriteLine("is not exsist");
                 try
                 {
                     connect.Open();
@@ -155,6 +157,7 @@ namespace Malshinon.Data
             }
             else
             {
+                Console.WriteLine("is exsist");
                 string done = updateTargetsByName(target ,target.Name);
                 return done;
             }
@@ -280,7 +283,7 @@ namespace Malshinon.Data
                     command.Parameters.AddWithValue("@id", id);
 
                     // execute the query
-                    object result = command.ExecuteNonQuery();
+                    object result = command.ExecuteScalar();
                     
                     return Convert.ToInt32(result) == 1;
                 }
