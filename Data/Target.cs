@@ -10,10 +10,11 @@ namespace Malshinon.Data
     {
 
         public string CodeName {  get; set; }
-        protected int DangerLevel { get; set; } = 0;
+        public int DangerLevel { get; set; } = 0;
+        public int NumberOfReports { get; set; } = 0;
 
 
-        public Target(string name, int id, int dangerLevel): base(name, id)
+        public Target(string name, int dangerLevel): base(name)
         {
             this.CodeName = setCodeName();
             this.DangerLevel = dangerLevel;
@@ -25,6 +26,12 @@ namespace Malshinon.Data
         public string setCodeName()
         {
             return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+        }
+
+        // update number of reports
+        public void setNumberOfReports()
+        {
+            this.NumberOfReports += 1 ;
         }
 
 

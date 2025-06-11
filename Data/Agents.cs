@@ -9,14 +9,13 @@ namespace Malshinon.Data
     internal class Agent
     {
 
-        public int id { get; set; }
+        public int? id { get; set; }
         public string name { get; set; }
         public string? codeName {  get; set; }
         protected List<Reporter> Reporters { get; set; } = new ();
 
-        public Agent(int id, string name)
+        public Agent( string name)
         {
-            this.id = id;
             this.name = name;
         }
 
@@ -29,7 +28,7 @@ namespace Malshinon.Data
 
         public void AddReporter(Reporter reporter)
         {
-            if (reporter != null && !Reporters.Any(r => r.CodeName == reporter.CodeName))
+            if (reporter != null && !Reporters.Any(r => r.codeName == reporter.codeName))
             {
                 Reporters.Add(reporter);
             }
@@ -43,7 +42,6 @@ namespace Malshinon.Data
         public static Agent getAgent(int? agentId, string? name)
         {
             
-
             return new Agent();
         }
 

@@ -8,25 +8,25 @@ namespace Malshinon.Data
 {
     internal class Reporter : Person
     {
-        public string CodeName { get; set; }
+        public string codeName { get; set; }
         protected bool IsRecruited { get; set; } = false;
-        protected int Rating { get; set; } = 0;
+        public int rating { get; set; } = 0;
 
         
 
 
         // constructor
-        public Reporter(string name, int id) : base(name, id)
+        public Reporter(string name) : base(name)
         {
-            this.CodeName = setCodeName();
+            this.codeName = setCodeName();
 
         }
 
 
         // set new assigned to reporter
-        public void setIsRecruise()
+        public bool setIsRecruise()
         {
-            this.IsRecruited = Rating >= 10 ||  ;
+            return this.IsRecruited = rating >= 10  ;
         }
 
 
@@ -36,8 +36,11 @@ namespace Malshinon.Data
             return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
         }
 
-
-
+        // update rating
+        public void setRating()
+        {
+            this.rating += 1 ;
+        }
 
 
 

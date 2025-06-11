@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Malshinon.Flow
 {
-    internal class Print
+    internal static class Print
     {
 
         // all the prints will be here
@@ -20,7 +20,8 @@ namespace Malshinon.Flow
             Console.WriteLine("1. Report");
             Console.WriteLine("2. Management login");
             Console.WriteLine("3. Exit ");
-            Console.WriteLine("4. Your choice: \n  ");
+            Console.WriteLine("Your choice -    ");
+            Console.ReadLine();
         }
 
 

@@ -9,13 +9,12 @@ namespace Malshinon.Data
     abstract class Person
     {
         public string Name { get; set; }
-        protected int Id { get; set; }
+        public int Id { get; set; }
 
         
-        public Person(string name, int id)
+        public Person(string name)
         {
             this.Name = name;
-            this.Id = id;
         }
 
 
