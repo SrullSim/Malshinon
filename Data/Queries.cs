@@ -24,13 +24,17 @@ namespace Malshinon.Data
         
         public static string getReport = @"SELECT * FROM reports WHERE id=@id";
 
+        public static string deleteReport = "DELETE ";
+
 
 
 
         // querys from table reporters
         public static string insertReporter = @"INSERT INTO reporters(id, name, codeName, rating) VALUES(@id, @name, @codeName, @rating)";
+        
         public static string getReporter = @"SELECT * FROM reporters WHERE id=@iD OR name=@name OR codeName=@codeName";
-        public static string updateReporter = @"UPDATE reporters SET @";
+        
+        public static string updateReporter = @"UPDATE reporters SET rating=@rating WHERE id=@id";
 
 
         // querrys from table targets
@@ -38,16 +42,22 @@ namespace Malshinon.Data
 
         public static string getTarget = @"SELECT * FROM targets WHERE id=@id";
 
+        public static string updateTargetsByName = @"UPDATE targets SET numberOfReports=@numberOfReports  WHERE name=@name";
+
 
 
         // querrys from table alerts
         public static string insertAlert = @"INSERT INTO alerts(id, target, time, description) VALUE(@id, @target, @time, @description)";
 
         public static string getAlert = @"SELECT * FROM alerts WHERE id=@id";
-        
 
 
+        public static string getReporterCodeNameById = "SELECT codeName FROM reporters WHERE id=@id";
         
+        public static string getTargetCodeNameById = "SELECT codeName FROM targets WHERE id=@id";
+
+
+
 
 
 

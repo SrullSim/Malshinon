@@ -11,7 +11,7 @@ namespace Malshinon.Flow
 
         // all the prints will be here
 
-        public static void entryPrint()
+        public static int entryPrint()
         {
             Console.Clear();
             Console.WriteLine("===============    Malshinon    ===============");
@@ -21,27 +21,58 @@ namespace Malshinon.Flow
             Console.WriteLine("2. Management login");
             Console.WriteLine("3. Exit ");
             Console.WriteLine("Your choice -    ");
-            Console.ReadLine();
+            int coise = int.Parse(Console.ReadLine());
+            return coise;
         }
 
 
-        public static void Report()
+        public static int Report_getReporterId()
         { 
             Console.Clear();
             Console.WriteLine("===============    Malshinon    ===============");
             Console.WriteLine("Welcome to the report menu");
-            Console.WriteLine("Please enter your name or Code name : ");
-            Console.WriteLine("0.Back to main menu");
+            Console.WriteLine("Please enter your id : ");
+            int choise = int.Parse(Console.ReadLine());
+            return choise;
         }
 
 
-        public static void ReportPrint()
+        public static string Report_getReporterName()
         {
             Console.Clear();
             Console.WriteLine("===============    Malshinon    ===============");
-            Console.WriteLine("Please enter your target \n  ");
+            Console.WriteLine("Welcome to the report menu");
+            Console.WriteLine("Please enter your name : ");
+            string choise = Console.ReadLine();
+            return choise;
+
+        }
+        public static int ReportPrint_GetTargetId()
+        {
+            Console.Clear();
+            Console.WriteLine("===============    Malshinon    ===============");
+            Console.WriteLine("Please enter your target id \n  ");
+            int choise = int.Parse(Console.ReadLine());
+            return choise;
+
+        }
+
+
+        public static string Report_getTargetName()
+        {
+            Console.Clear();
+            Console.WriteLine("===============    Malshinon    ===============");
+            Console.WriteLine("Welcome to the report menu");
+            Console.WriteLine("Please enter your target name : ");
+            string choise = Console.ReadLine();
+            return choise;
+        }
+
+        public static string ReportPrint_GetText()
+        {
             Console.WriteLine("enter your report  \n  ");
-            Console.WriteLine("0.Back to main menu");
+            string choise = Console.ReadLine();
+            return choise;
         }
 
 

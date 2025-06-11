@@ -12,9 +12,10 @@ namespace Malshinon.Data
         public int Id { get; set; }
 
         
-        public Person(string name)
+        public Person(int id,string name)
         {
             this.Name = name;
+            this.Id = id;
         }
 
 

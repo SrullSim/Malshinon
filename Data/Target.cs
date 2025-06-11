@@ -14,18 +14,27 @@ namespace Malshinon.Data
         public int NumberOfReports { get; set; } = 0;
 
 
-        public Target(string name, int dangerLevel): base(name)
+        public Target(int id ,string name, int dangerLevel): base(id, name)
         {
-            this.CodeName = setCodeName();
+            this.Id = id;
+            this.CodeName = setCodeName(id);
             this.DangerLevel = dangerLevel;
+
         }
 
 
 
         // set code name to every new target
-        public string setCodeName()
+        public static string setCodeName(int id)
         {
-            return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+            if (Dal.IsIdExists("reporters", id))
+            {
+                return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+            }
+            else
+            {
+                return Dal.getTargetCodeNameById(id);
+            }
         }
 
         // update number of reports

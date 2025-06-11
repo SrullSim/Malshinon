@@ -5,12 +5,15 @@ namespace Malshinon
 {
     internal class Program
     {
+        
+        
+        
         static void Main(string[] args)
         {
-            ManageReports managereports = new ManageReports();
+            Dal managereports = new Dal();
 
-            Reporter reporter =new Reporter("נסיוני");
-            Target target = new Target("חיובי",4);
+            Reporter reporter =new Reporter(58,"rerrr");
+            Target target = new Target(96,"ali", 8);
             Report report = new Report();
             
             report.reporter = reporter;
@@ -18,8 +21,7 @@ namespace Malshinon
             report.text = "תמיד שמח";
             
             managereports.AddReport(report);
-            Agent p = managereports.GetTarget(12);
-            Console.WriteLine(p.codeName);
+
         }
     }
 }

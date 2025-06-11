@@ -16,9 +16,9 @@ namespace Malshinon.Data
 
 
         // constructor
-        public Reporter(string name) : base(name)
+        public Reporter(int id,string name) :  base(id , name)
         {
-            this.codeName = setCodeName();
+            this.codeName = setCodeName(id);
 
         }
 
@@ -31,9 +31,16 @@ namespace Malshinon.Data
 
 
         // set code name to every new reporter
-        public string setCodeName()
+        public static string setCodeName(int id)
         {
-            return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+            if (Dal.IsIdExists("reporters", id))
+            {
+                return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+            }
+            else
+            {
+                return Dal.getReportrterCodeNameById(id);
+            }
         }
 
         // update rating
@@ -42,7 +49,15 @@ namespace Malshinon.Data
             this.rating += 1 ;
         }
 
+        public void setID(int id)
+        {
+            this.Id = id ;
+        }
 
+        public void setName(string name)
+        {
+            this.Name = name ;
+        }
 
     }
 }
