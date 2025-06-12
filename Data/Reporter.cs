@@ -8,9 +8,9 @@ namespace Malshinon.Data
 {
     internal class Reporter : Person
     {
-        public string codeName { get; set; }
+        public string codeName { get; set; } 
         protected bool IsRecruited { get; set; } = false;
-        public int rating { get; set; } = 0;
+        public int rating { get; set; } 
 
         
 
@@ -35,12 +35,14 @@ namespace Malshinon.Data
         // set code name to every new reporter
         public static string setCodeName(int id)
         {
-            if (Dal.IsIdExists("reporters", id))
+            if (!Dal.IsIdExists("reporters", id))
             {
+                Console.WriteLine("did code name");
                 return Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
             }
             else
             {
+                Console.WriteLine("no code name");
                 return Dal.getReportrterCodeNameById(id);
             }
         }

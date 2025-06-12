@@ -42,7 +42,7 @@ namespace Malshinon.Data
 
         public static string getTarget = @"SELECT * FROM targets WHERE id=@id";
 
-        public static string updateTargetsByName = @"UPDATE targets SET numberOfReports=@numberOfReports  WHERE name=@name";
+        public static string updateTargetsById = @"UPDATE targets SET numberOfReports=@numberOfReports  WHERE id=@id";
 
 
 
@@ -56,7 +56,9 @@ namespace Malshinon.Data
         
         public static string getTargetCodeNameById = "SELECT codeName FROM targets WHERE id=@id";
 
-
+        public static string getRatingReporter = "SELECT rating FROM reporters WHERE id=@id";
+        
+        public static string getNumberOfReports = "SELECT numberOfReports FROM targets WHERE id=@id";
 
 
 

@@ -19,7 +19,6 @@ namespace Malshinon.Flow
             {
                 case 1:
                     executeReport();
-
                     break;
 
                 case 2:
@@ -49,11 +48,15 @@ namespace Malshinon.Flow
             report.reporter.Id = Print.Report_getReporterId();
             // gef reporter name
             report.reporter.Name = Print.Report_getReporterName();
+            // set reporter code name
+            report.reporter.codeName = Reporter.setCodeName(report.reporter.Id);
 
             // get target  id
             report.target.Id = Print.ReportPrint_GetTargetId();
             // get target name
             report.target.Name = Print.Report_getTargetName();
+            // set target code name
+            report.target.codeName = Target.setCodeName(report.target.Id);
 
             //get report text 
             report.text = Print.ReportPrint_GetText();

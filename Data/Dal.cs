@@ -16,7 +16,7 @@ namespace Malshinon.Data
         protected List<string> Names = new();
 
         // the connection string
-        public static string connectionString { get; set; } = "server=localhost;"+
+        public static string connectionString { get; set; } = "server=localhost;" +
                                                           "port=3306;" +
                                                           "user=root;" +
                                                           "password=;" +
@@ -32,7 +32,7 @@ namespace Malshinon.Data
             {
                 // open connection
                 connect.Open();
-                
+
                 //string query = Queries.insertReport;
                 string query = @"INSERT INTO reports(reporter, target, text, timeOfReport) 
                                    VALUE(@reporter, @target, @text, @timeOfReport)";
@@ -43,22 +43,18 @@ namespace Malshinon.Data
                 command.Parameters.AddWithValue("@target", report.target.Name);
                 command.Parameters.AddWithValue("@text", report.text);
                 command.Parameters.AddWithValue("@timeOfReport", report.timeOfReport);
-                
+
 
                 int result = command.ExecuteNonQuery();
-                Console.WriteLine("succcessfully" );
 
                 connect.Close();
 
-                
+
                 // add the reporter to DB reporters
-                AddReporterToDB(report.reporter);                                                                                       
-                //report.reporter.setRating();
-                Console.WriteLine("db reporter");
+                AddReporterToDB(report.reporter);
 
                 // add the target to DB targets
                 AddTargetToDB(report.target);
-                report.target.setNumberOfReports();
 
 
                 return "report added successfully";
@@ -68,16 +64,16 @@ namespace Malshinon.Data
                 Console.WriteLine("Error: " + ex.Message);
                 return "Error: " + ex.Message;
             }
-            finally 
+            finally
             {
                 // closing the connection
                 connect.Close();
                 report.target.DangerLevel += 1;
             }
         }
-        
-       
-        
+
+
+
         // add reporter to DB reporters
         public string AddReporterToDB(Reporter reporter)
         {
@@ -102,7 +98,6 @@ namespace Malshinon.Data
                     // execute the commad
                     command.ExecuteNonQuery();
                     return " reporter add successfully to reporters";
-                    Console.WriteLine("the reporter update successfully");
 
                 }
                 catch (Exception ex)
@@ -118,8 +113,8 @@ namespace Malshinon.Data
                 return "the reporter update successfully";
             }
         }
-        
-        
+
+
         // add target to DB targets
         public string AddTargetToDB(Target target)
         {
@@ -127,7 +122,6 @@ namespace Malshinon.Data
 
             if (!IsIdExists("targets", target.Id))
             {
-                Console.WriteLine("is not exsist");
                 try
                 {
                     connect.Open();
@@ -137,7 +131,7 @@ namespace Malshinon.Data
 
                     command.Parameters.AddWithValue("@id", target.Id);
                     command.Parameters.AddWithValue("@name", target.Name);
-                    command.Parameters.AddWithValue("@codeName", target.CodeName);
+                    command.Parameters.AddWithValue("@codeName", target.codeName);
                     command.Parameters.AddWithValue("@dangerous", target.DangerLevel);
                     command.Parameters.AddWithValue("@numberOfReports", target.NumberOfReports);
 
@@ -158,7 +152,7 @@ namespace Malshinon.Data
             else
             {
                 Console.WriteLine("is exsist");
-                string done = updateTargetsByName(target ,target.Name);
+                string done = updateTargetsById(target);
                 return done;
             }
         }
@@ -190,10 +184,8 @@ namespace Malshinon.Data
                     agent.id = reader.GetInt32("id");
                     agent.name = reader.GetString("name");
                     agent.codeName = reader.GetString("codeName");
-                    Console.WriteLine("iiiiiiiiiiiiii");
 
                 }
-                Console.WriteLine("qqqqqqqqqqqqq");
                 return agent;
             }
             catch (Exception ex)
@@ -260,7 +252,7 @@ namespace Malshinon.Data
             return reports;
         }
 
-        
+
         public static bool IsIdExists(string tableName, int id)
         {
             // check for sql injection
@@ -284,7 +276,7 @@ namespace Malshinon.Data
 
                     // execute the query
                     object result = command.ExecuteScalar();
-                    
+
                     return Convert.ToInt32(result) == 1;
                 }
                 catch (Exception ex)
@@ -297,10 +289,10 @@ namespace Malshinon.Data
         }
 
 
-        public string updateTargetsByName(Target target, string name)
+        public string updateTargetsById(Target target)
         {
             //set query
-            string query = Queries.updateTargetsByName;
+            string query = Queries.updateTargetsById;
 
             using (MySqlCommand command = new MySqlCommand(query, connect))
 
@@ -308,8 +300,8 @@ namespace Malshinon.Data
                 {
                     connect.Open();
 
-                    command.Parameters.AddWithValue("@numberOfReports", target.NumberOfReports + 1);
-                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@numberOfReports", getNumberOfReports(target) + 1);
+                    command.Parameters.AddWithValue("@name", target.Id);
 
                     // execute 
                     command.ExecuteNonQuery();
@@ -326,23 +318,22 @@ namespace Malshinon.Data
         }
 
 
-        public string updateReporter(Reporter reporter) 
-        {  
+        public string updateReporter(Reporter reporter)
+        {
             string query = Queries.updateReporter;
 
             using (MySqlCommand command = new MySqlCommand(query, connect))
-            
+
                 try
                 {
                     connect.Open();
 
-                    command.Parameters.AddWithValue("@rating", (reporter.rating + 1));
+                    command.Parameters.AddWithValue("@rating", getRating(reporter) + 1);
                     command.Parameters.AddWithValue("@id", reporter.Id);
-                    Console.WriteLine("here problem");
 
                     // execute
                     command.ExecuteNonQuery();
-                    Console.WriteLine("here problem");
+                    Console.WriteLine("rating = updateReporter() " + reporter.rating);
                     return "the reporter update successfully";
                 }
                 catch (Exception ex)
@@ -352,12 +343,12 @@ namespace Malshinon.Data
                 }
                 finally { connect?.Close(); }
 
-                                                                                                    
+
         }
 
 
         // check for reporter code name
-        public static string getReportrterCodeNameById(int id) 
+        public static string getReportrterCodeNameById(int id)
         {
             string query = Queries.getReporterCodeNameById;
 
@@ -374,16 +365,15 @@ namespace Malshinon.Data
                     object result = command.ExecuteScalar();
                     if (result != null && result != DBNull.Value)
                     {
-                        Console.WriteLine(id + " ppppooooodidiididid reporter get");
                         return result.ToString();
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine("no code name provide");
                         return "code name not found";
                     }
                 }
-                catch (MySqlException ex) 
+                catch (MySqlException ex)
                 {
                     Console.WriteLine("error get codeName: " + ex.Message);
                     return "error to get code name :" + ex.Message;
@@ -437,11 +427,114 @@ namespace Malshinon.Data
             }
         }
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+        public static int getRating(Reporter reporter)
+        {
+            if (reporter != null)
+            {
+                string query = Queries.getRatingReporter;
+
+                MySqlConnection connect = new MySqlConnection(connectionString);
+
+                try
+                {
+                    connect.Open();
+                    MySqlCommand command = new MySqlCommand(query, connect);
+                    command.Parameters.AddWithValue("@id", reporter.Id);
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        reporter.rating = Convert.ToInt32(result);
+                        Console.WriteLine("rating = getRating () " + reporter.rating);
+                        return reporter.rating;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("no rating found for this reporter");
+                        reporter.rating = 0; // default rating if not found
+                        return reporter.rating;
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("error get rating: " + ex.Message);
+                    return -1;
+                }
+                finally
+                {
+                    connect?.Close();
+                }
+            }
+            else
+            {
+                return -1; 
+            }
+
+        }
+
+
+
+        public static int getNumberOfReports(Target target)
+        {
+            if (target != null)
+            {
+                string query = Queries.getNumberOfReports;
+
+                MySqlConnection connect = new MySqlConnection(connectionString);
+
+                try
+                {
+                    connect.Open();
+                    MySqlCommand command = new MySqlCommand(query, connect);
+                    command.Parameters.AddWithValue("@id", target.Id);
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        target.NumberOfReports = Convert.ToInt32(result);
+                        Console.WriteLine("rating = " + target.NumberOfReports);
+                        return target.NumberOfReports;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("no rating found for this reporter");
+                        target.NumberOfReports = 0; // default rating if not found
+                        return target.NumberOfReports;
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("error get rating: " + ex.Message);
+                    return -1;
+                }
+                finally
+                {
+                    connect?.Close();
+                }
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
