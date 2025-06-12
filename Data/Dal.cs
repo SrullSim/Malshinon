@@ -301,11 +301,11 @@ namespace Malshinon.Data
                     connect.Open();
 
                     command.Parameters.AddWithValue("@numberOfReports", getNumberOfReports(target) + 1);
-                    command.Parameters.AddWithValue("@name", target.Id);
+                    command.Parameters.AddWithValue("@id", target.Id);
 
                     // execute 
                     command.ExecuteNonQuery();
-                    Console.WriteLine("33333333333333333");
+
                     return "update target numberOfReports";
 
                 }
@@ -342,8 +342,6 @@ namespace Malshinon.Data
                     return "error: " + ex.Message;
                 }
                 finally { connect?.Close(); }
-
-
         }
 
 
@@ -428,9 +426,6 @@ namespace Malshinon.Data
         }
 
 
-
-
-
         public static int getRating(Reporter reporter)
         {
             if (reporter != null)
@@ -495,9 +490,8 @@ namespace Malshinon.Data
                     if (result != null && result != DBNull.Value)
                     {
                         target.NumberOfReports = Convert.ToInt32(result);
-                        Console.WriteLine("rating = " + target.NumberOfReports);
+                        Console.WriteLine("rating = getNumberOfReports()" + target.NumberOfReports);
                         return target.NumberOfReports;
-
                     }
                     else
                     {
@@ -520,7 +514,6 @@ namespace Malshinon.Data
             {
                 return -1;
             }
-
         }
 
 
